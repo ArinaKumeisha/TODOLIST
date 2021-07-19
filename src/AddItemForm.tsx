@@ -33,8 +33,6 @@ function AddItemForm(props: AddItemFormPropsType) {
 
     return (
         <div>
-
-
             <TextField                             //input
                 label={"Title"}
                 value={title}

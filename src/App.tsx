@@ -43,7 +43,6 @@ function App() {
     })
 
 
-
     function changeTaskTitle(taskID: string, title: string, todoListID: string) {
         const todoListTasks = tasks[todoListID]
         tasks[todoListID] = todoListTasks.map(t =>
@@ -55,7 +54,6 @@ function App() {
         tasks[todoListID] = tasks[todoListID].filter(t => t.id !== taskID);
         setTasks({...tasks});
     }
-
 
     function addTask(title: string, todoListID: string) {
         let newTask: TaskType = {
@@ -83,7 +81,7 @@ function App() {
         setTodoLists(upDatedTodoLists)
     }
 
-    /*let [filter, setFilter] = useState<FilterValuesType>("all");*/
+
 
     function addTodoList(title: string) {
         const newTodoListID = v1()
@@ -123,34 +121,35 @@ function App() {
         return (
             <Grid item key={tl.id}>
                 <Paper style={{padding: "20px"}}>
-            <Todolist
-                todoListID={tl.id}
-                filter={tl.filter}
-                title={tl.title}
-                tasks={tasksForTodoLists}
-                removeTask={removeTask}
-                changeTodoListFilter={changeTodoListFilter}
-                addTask={addTask}
-                changeTaskStatus={changeTaskStatus}
-                removeTodoList={removeTodoList}
-                changeTaskTitle={changeTaskTitle}
-                changeTodoListTitle={changeTodoListTitle}
-            />
+                    <Todolist
+                        todoListID={tl.id}
+                        filter={tl.filter}
+                        title={tl.title}
+                        tasks={tasksForTodoLists}
+                        removeTask={removeTask}
+                        changeTodoListFilter={changeTodoListFilter}
+                        addTask={addTask}
+                        changeTaskStatus={changeTaskStatus}
+                        removeTodoList={removeTodoList}
+                        changeTaskTitle={changeTaskTitle}
+                        changeTodoListTitle={changeTodoListTitle}
+                    />
                 </Paper>
-           </Grid>
-        )})
-    const gridStyle={padding: "20px 0"}
+            </Grid>
+        )
+    })
+    const gridStyle = {padding: "20px 0"}
     return (
 
         <div className="App">
             <AppBar position="static">
 
                 <Toolbar style={{justifyContent: "space-between"}}>
-                    <IconButton edge="start"  color="inherit" aria-label="menu">
-                        <Menu />
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <Menu/>
                     </IconButton>
-                    <Typography variant="h6" >
-                       TodoLists
+                    <Typography variant="h6">
+                        TodoLists
                     </Typography>
                     <Button
                         variant={"outlined"}
@@ -158,18 +157,16 @@ function App() {
                 </Toolbar>
             </AppBar>
             <Container fixed>   {/* fixed - фиксированная ширина*/}
-            <Grid container style={gridStyle}>   {/* это 1 ряд*/}
-            <AddItemForm addItem={addTodoList}/>
-            </Grid>
+                <Grid container style={gridStyle}>   {/* это 1 ряд*/}
+                    <AddItemForm addItem={addTodoList}/>
+                </Grid>
                 <Grid container spacing={3}>   {/* это 2 ряд*/}
-                {todoListsComponents}
-               </Grid>
+                    {todoListsComponents}
+                </Grid>
             </Container>
         </div>
     )
 }
-
-
 
 
 export default App;
