@@ -28,25 +28,29 @@ export type ChangeTodoListFilterAT = {
     value: FilterValuesType
 }
 
-export const todoListReducer = (todoLists: Array<TodolistType>, action: ActionsType): Array<TodolistType> => {
+export let todoListID_1 = v1()
+export let todoListID_2 = v1()
+const initialState: Array<TodolistType> = []
+export const todoListReducer = (todoLists=initialState, action: ActionsType): Array<TodolistType> => {
     switch (action.type) {
         case "REMOVE-TODOLIST":
             return todoLists.filter(tl => tl.id !== action.todoListID)
-        case "ADD-TODOLIST" :
 
+        case "ADD-TODOLIST" :
             const newTodoList: TodolistType = {
                 id: action.todoListID,
                 title: action.title,
                 filter: "all"
             }
-            return [...todoLists, newTodoList]
+            return [newTodoList,...todoLists ]
 
         case "CHANGE-TODOLIST-TITLE":
             return todoLists.map(tl => tl.id === action.todoListID ? {...tl, title: action.title} : tl)
+
         case "CHANGE-TODOLIST-FILTER":
             return todoLists.map(tl => tl.id === action.todoListID ? {...tl, filter: action.value} : tl)
         default:
-            return todoLists
+        return todoLists
     }
 }
 
@@ -58,7 +62,7 @@ export const addTodoListAC = (title: string): AddTodoListAT => {
     return {type: "ADD-TODOLIST", title: title, todoListID: v1()}
 }
 
-export const сhangeTodoListFilterAC = (todoListID: string, value: FilterValuesType): ChangeTodoListFilterAT => {  //функции АС надо писать с маленькой буквы
+export const changeTodoListFilterAC = (todoListID: string, value: FilterValuesType): ChangeTodoListFilterAT => {  //функции АС надо писать с маленькой буквы
     return {
         type: "CHANGE-TODOLIST-FILTER",
         todoListID: todoListID, value: value
